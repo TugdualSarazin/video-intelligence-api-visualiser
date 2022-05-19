@@ -32,7 +32,8 @@ function nullable_time_offset_to_seconds(time_offset) {
         return 0
 
     var seconds = time_offset.seconds || 0
-    seconds += time_offset.nanos / 10e8 || 0
+    //seconds += time_offset.nanos / 10e8 || 0
+    seconds += time_offset.microseconds / 1e6 || 0
     return seconds
 }
 

@@ -183,7 +183,7 @@
 
 
 
-        <div id="upload-data">
+        <div id="upload-data" style="display: none;">
             <h5>Try with your data</h5>
             <p>You can analyse a video by following the instructions <a target="_blank"
                     href="https://cloud.google.com/video-intelligence/docs/quickstart?utm_source=ext&utm_medium=partner&utm_campaign=CDR_zac_aiml_vid_intel_demo_interactive demo_060221&utm_content=-">here</a>.
@@ -205,7 +205,7 @@
         </div>
 
         <div v-if="data_misaligned" class="data-warning">
-            It looks like the json data dosn't align with the video file, are you sure you have all of the right files
+            It looks like the json data doesn't align with the video file, are you sure you have all of the right files
             uploaded?
         </div>
 
@@ -217,53 +217,11 @@
         <object-tracking-viz v-if="current_view == 'Object Tracking'" id="object_tracks" v-bind:json_data="json_data"
             v-bind:video_info="video_info" v-on:segment-clicked="jump_video"></object-tracking-viz>
 
-        <label-detection-viz v-if="current_view == 'Label Detection'" id="label_detection" v-bind:json_data="json_data"
-            v-bind:video_info="video_info" v-on:segment-clicked="jump_video"></label-detection-viz>
-
-        <shot-detection-viz v-if="current_view == 'Shot Detection'" id="shot_detection" v-bind:json_data="json_data"
-            v-bind:video_info="video_info" v-on:shot-clicked="jump_video"></shot-detection-viz>
-
-        <speech-transcription-viz v-if="current_view == 'Speech Transcription'" id="speech_transcription"
-            v-bind:json_data="json_data" v-bind:video_info="video_info" v-on:word-clicked="jump_video">
-        </speech-transcription-viz>
-
-        <person-detection-viz v-if="current_view == 'Person Detection'" id="person_detection"
-            v-bind:json_data="json_data" v-bind:video_info="video_info" v-on:segment-clicked="jump_video">
-        </person-detection-viz>
-
-        <face-detection-viz v-if="current_view == 'Face Detection'" id="face_detection" v-bind:json_data="json_data"
-            v-bind:video_info="video_info" v-on:segment-clicked="jump_video">
-        </face-detection-viz>
-
-        <logo-recognition-viz v-if="current_view == 'Logo Recognition'" id="logo_recognition"
-            v-bind:json_data="json_data" v-bind:video_info="video_info" v-on:segment-clicked="jump_video">
-        </logo-recognition-viz>
-
-        <text-detection-viz v-if="current_view == 'Text Detection'" id="text_detection" v-bind:json_data="json_data"
-            v-bind:video_info="video_info" v-on:segment-clicked="jump_video">
-        </text-detection-viz>
-
-        <explicit-content-detection-viz v-if="current_view == 'Explicit Content Detection'"
-            id="explicit_content_detection" v-bind:json_data="json_data" v-bind:video_info="video_info"
-            v-on:shot-clicked="jump_video">
-        </explicit-content-detection-viz>
-
     </div>
-
-
-
 
     <script src="utils/utils.js"></script>
 
-    <script src="components/object_tracking.js"></script>
-    <script src="components/label_detection.js"></script>
-    <script src="components/shot_detection.js"></script>
-    <script src="components/speech_transcription.js"></script>
-    <script src="components/person_detection.js"></script>
-    <script src="components/face_detection.js"></script>
-    <script src="components/logo_recognition.js"></script>
-    <script src="components/text_detection.js"></script>
-    <script src="components/explicit_content_detection.js"></script>
+    <script src="components/object_tracking2.js"></script>
 
     <script>
 
@@ -272,8 +230,6 @@
             video.currentTime = time
             video.play()
         }
-
-
 
         // define component
         Vue.component('annotations-nav-tab', {
@@ -324,17 +280,9 @@
                 json_data: {},
                 video_info: { width: 800, height: 500, length: 252 },
                 video_length: 252,
-                current_view: 'Label Detection',
+                current_view: 'Object Tracking',
                 title_ids_dict: {
-                    'Label Detection': 'shot_label_annotations',
-                    'Shot Detection': 'shot_annotations',
                     'Object Tracking': 'object_annotations',
-                    'Person Detection': 'person_detection_annotations',
-                    'Face Detection': 'face_detection_annotations',
-                    'Logo Recognition': 'logo_recognition_annotations',
-                    'Speech Transcription': 'speech_transcriptions',
-                    'Text Detection': 'text_annotations',
-                    'Explicit Content Detection': 'explicit_annotation'
                 }
             }, methods: {
                 jump_video: function (event_data) {
@@ -344,8 +292,6 @@
                 set_current_view: function (new_view) {
                     this.current_view = new_view
                     router.push({hash: '#'+new_view  })
-
-
                 }
             },
             computed: {
@@ -460,9 +406,24 @@
         video_input.addEventListener('change', load_video_dragged, false)
         json_input.addEventListener('change', load_json_dragged, false)
 
-        load_json_from_url("assets/test_json.json")
-        load_video_from_url("assets/test_video.mp4")
+        /*load_json_from_url("assets/test_json.json")
+        load_video_from_url("assets/test_video.mp4")*/
 
+        /*load_json_from_url("assets/video_bcn/video_tracking.json")
+        load_video_from_url("assets/video_bcn/MVI_9515_short.MOV")*/
+
+        /*load_json_from_url("assets/video_systematica/result_tracking_test1.json")
+        load_video_from_url("assets/video_systematica/test1.mp4")*/
+
+        /*load_json_from_url("assets/video_systematica/result_tracking_test2.json")
+        load_video_from_url("assets/video_systematica/test2.mp4")*/
+
+        /*load_json_from_url("assets/video_systematica/result_tracking_test3.json")
+        load_video_from_url("assets/video_systematica/test3.mp4")*/
+
+        load_json_from_url("assets/video_systematica/result_tracking_test4.json")
+        /*load_video_from_url("assets/video_systematica/test4.mp4")*/
+        load_video_from_url("https://storage.googleapis.com/video-tracking-public/input_videos/test4.mp4")
 
         // check for hash code in url 
 
